@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Documents - RAG Chatbot{% endblock %}
+
+{% block content %}
+<div class="docs-wrapper">
+    <h1>Documents</h1>
+
+    <section class="upload-section">
+        <h2>Upload a document</h2>
+        <p class="hint">Allowed types: .pdf, .docx, .html</p>
+        <form id="upload-form" class="upload-form">
+            <input id="file-input" type="file" accept=".pdf,.docx,.html" required>
+            <button type="submit">Upload &amp; Index</button>
+        </form>
+        <div id="upload-status" class="status"></div>
+    </section>
+
+    <section class="list-section">
+        <h2>Indexed documents</h2>
+        {% if documents %}
+        <table class="docs-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Filename</th>
+                    <th>Uploaded</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for doc in documents %}
+                <tr data-file-id="{{ doc.id }}">
+                    <td>{{ doc.id }}</td>
+                    <td>{{ doc.filename }}</td>
+                    <td>{{ doc.upload_timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>
+                        <button class="delete-btn" data-file-id="{{ doc.id }}">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="empty">No documents indexed yet.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='js/documents.js') }}"></script>
+{% endblock %}

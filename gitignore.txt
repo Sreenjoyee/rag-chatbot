@@ -7,8 +7,6 @@ env/
 .env
 *.log
 chroma_db/
-fastembed_cache/
-local_cache/
 temp_*
 .DS_Store
 .idea/

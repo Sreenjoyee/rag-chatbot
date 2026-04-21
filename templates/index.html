@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Chat - RAG Chatbot{% endblock %}
+
+{% block content %}
+<div class="chat-wrapper">
+    <h1>Chat with your documents</h1>
+
+    <div class="chat-controls">
+        <label for="model-select">Model:</label>
+        <select id="model-select">
+            <option value="llama-3.3-70b-versatile" selected>Llama 3.3 70B (Groq)</option>
+            <option value="llama-3.1-8b-instant">Llama 3.1 8B — fastest</option>
+            <option value="openai/gpt-oss-120b">GPT-OSS 120B</option>
+        </select>
+        <button id="new-session-btn" type="button">New session</button>
+    </div>
+
+    <div id="chat-box" class="chat-box"></div>
+
+    <form id="chat-form" class="chat-form">
+        <input
+            id="chat-input"
+            type="text"
+            placeholder="Ask a question about your documents..."
+            autocomplete="off"
+            required
+        >
+        <button type="submit">Send</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='js/chat.js') }}"></script>
+{% endblock %}

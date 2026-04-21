@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}RAG Chatbot{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">RAG Chatbot</a>
+            <div class="nav-links">
+                {% if current_user %}
+                    <a href="/">Chat</a>
+                    <a href="/docs-ui">Documents</a>
+                    <span class="nav-user">{{ current_user.username }}</span>
+                    <form method="post" action="/logout" class="nav-logout-form">
+                        <button type="submit" class="nav-logout-btn">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="/login">Login</a>
+                    <a href="/signup">Sign up</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>
